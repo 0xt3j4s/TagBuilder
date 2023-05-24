@@ -2,47 +2,55 @@ package handlers
 
 import (
 	"encoding/json"
-
+	"bytes"
+	"log"
 	"net/http"
 	"tagbuilder/dto"
 )
 
 func BuildTagsHandler() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Parse the request body
-		var requestData struct {
-			Sentence string `json:"sentence"`
-		}
-		err := json.NewDecoder(r.Body).Decode(&requestData)
+		// Parse the request body into a SentenceDto
+		var sentenceDto dto.SentenceDto
+		err := json.NewDecoder(r.Body).Decode(&sentenceDto)
 		if err != nil {
-			http.Error(w, "Invalid request", http.StatusBadRequest)
+			log.Println("Error decoding request body:", err)
+			http.Error(w, "Invalid request body", http.StatusBadRequest)
 			return
 		}
 
-		// Generate tags based on the sentence
-		tags := generateTags(requestData.Sentence)
-
-		// Create a response with the generated tags
-		response := dto.TagDto{
-			Tags: tags,
-		}
-
-		// Convert the response to JSON
-		responseJSON, err := json.Marshal(response)
+		// Send a request to the Python application
+		pythonURL := "http://localhost:5000/generate-tags/"
+		reqBody, err := json.Marshal(sentenceDto)
 		if err != nil {
+			log.Println("Error marshaling request body:", err)
 			http.Error(w, "Internal server error", http.StatusInternalServerError)
 			return
 		}
+		resp, err := http.Post(pythonURL, "application/json", bytes.NewBuffer(reqBody))
+		if err != nil {
+			log.Println("Error sending request to Python application:", err)
+			http.Error(w, "Failed to fetch tags", http.StatusInternalServerError)
+			return
+		}
+		defer resp.Body.Close()
 
-		// Set the response headers and write the JSON response
+		// Parse the response body into a TagResponse
+		var tagResponse dto.TagDto
+		err = json.NewDecoder(resp.Body).Decode(&tagResponse)
+		if err != nil {
+			log.Println("Error decoding response body:", err)
+			http.Error(w, "Failed to parse tags response", http.StatusInternalServerError)
+			return
+		}
+
+		// Write the tags as a JSON response
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		w.Write(responseJSON)
+		err = json.NewEncoder(w).Encode(tagResponse)
+		if err != nil {
+			log.Println("Error encoding response:", err)
+			http.Error(w, "Failed to encode response", http.StatusInternalServerError)
+			return
+		}
 	})
-}
-
-func generateTags(sentence string) []string {
-	// Implement your logic to generate tags based on the sentence
-	// Replace this with your own implementation
-	return []string{"tag1", "tag2", "tag3"}
 }
