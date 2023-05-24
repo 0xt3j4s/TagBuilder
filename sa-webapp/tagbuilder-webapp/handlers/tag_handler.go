@@ -40,3 +40,9 @@ func BuildTagsHandler() http.Handler {
 		w.Write(responseJSON)
 	})
 }
+
+func generateTags(sentence string) []string {
+	// Implement your logic to generate tags based on the sentence
+	// Replace this with your own implementation
+	return []string{"tag1", "tag2", "tag3"}
+}
