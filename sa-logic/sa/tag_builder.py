@@ -1,4 +1,3 @@
-# from textblob import TextBlob
 import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
