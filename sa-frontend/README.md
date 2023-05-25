@@ -1,14 +1,19 @@
+## Setting up React for Local deployment
+` $ npm install `
+
 ## Starting the Web App Locally
-` $ yarn start `
+` $ npm start `
 
-## Building the application
-` $ yarn build `
+## Building the application [Making the app production ready]
+` $ npm run build `
 
-## Building the container
-` $ docker build -f Dockerfile -t $DOCKER_USER_ID/sentiment-analysis-frontend . `
+## Building the container 
+` $ sudo docker build -t $DOCKER_USER_ID/tag-builder-frontend . `
 
 ## Running the container
-` $ docker run -d -p 80:80 $DOCKER_USER_ID/sentiment-analysis-frontend `
+` $ sudo docker run -d -p 80:80 $DOCKER_USER_ID/tag-builder-frontend `
 
 ## Pushing the container
-` $ docker push $DOCKER_USER_ID/sentiment-analysis-frontend `
+` $ sudo docker push $DOCKER_USER_ID/tag-builder-frontend`
+
+Note: All the commands are supposed to be executed in the sa-frontend directory
