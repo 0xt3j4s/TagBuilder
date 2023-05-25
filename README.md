@@ -74,7 +74,7 @@ $ cd ..
 ### Docker
 If you don't have Docker installed, you can follow the instructions [here](https://docs.docker.com/get-docker/).
 
-Pull the container images from Docker Hub using the following commands:
+### Pull the container images from Docker Hub using the following commands:
 
 ```bash
 $ sudo docker pull $DOCKER_USER_ID/tag-builder-logic
@@ -86,7 +86,7 @@ $ sudo docker pull $DOCKER_USER_ID/tag-builder-frontend
 
 This will pull the latest images from Docker Hub and store them in your local machine.
 
-To run the application, run the following commands:
+### To run the application, run the following commands:
 
 ```bash
 $ sudo docker run -d -p 5010:5010 $DOCKER_USER_ID/tag-builder-logic
