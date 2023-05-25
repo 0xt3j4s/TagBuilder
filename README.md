@@ -3,7 +3,9 @@
 TagBuilder is a microservice-based application that enables the generation of tags for sentences. In this application, we utilize Docker containers to encapsulate and deploy each microservice independently. 
 
 ## Application Demo
-This application has one functionality. It takes a sentence as input. Using Natural Language Toolkit (NLTK), generates tags for the sentence.
+This application has one functionality. It takes a sentence as input. Using Natural Language Toolkit (NLTK), generates tags for the sentence. The tags are then displayed to the user. 
+
+![Application Demo](/images/TagBuilder_demo.gif)
 
 The application consists of three microservices, each one of specific functionality. The microservices are:
 1. sa-frontend: a Nginx web server that serves our static ReactJS application.
@@ -91,4 +93,9 @@ $ sudo docker run -d -p 80:80 $DOCKER_USER_ID/tag-builder-frontend
 
 
 ## Contributing
-If you would like to contribute to TagBuilder, please follow the guidelines in CONTRIBUTING.md. We welcome contributions from the community.
+Contributions are welcome! If you find any issues or have suggestions for improvement, please create an issue or submit a pull request.
+<!-- If you would like to contribute to TagBuilder, please follow the guidelines in CONTRIBUTING.md. We welcome contributions from the community. -->
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](/LICENSE) file for details.
+
