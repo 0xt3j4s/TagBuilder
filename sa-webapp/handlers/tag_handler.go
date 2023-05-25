@@ -6,7 +6,6 @@ import (
 	"log"
 	"net/http"
 	"tagbuilder/dto"
-	"os"
 )
 
 func BuildTagsHandler() http.Handler {
@@ -21,8 +20,9 @@ func BuildTagsHandler() http.Handler {
 		}
 
 		// Send a request to the Python application
-		// pythonURL := "http://localhost:5000/generate-tags/"
-		pythonURL := os.Getenv("PYTHON_API_URL")
+		// pythonURL := "http://172.17.0.2/generate-tags/"
+		// pythonURL := os.Getenv("PYTHON_API_URL")
+		pythonURL := "http://localhost:5010/generate-tags/"
 		reqBody, err := json.Marshal(sentenceDto)
 		if err != nil {
 			log.Println("Error marshaling request body:", err)

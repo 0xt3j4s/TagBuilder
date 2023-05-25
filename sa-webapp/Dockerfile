@@ -7,14 +7,18 @@ WORKDIR /app
 # Copy the source code into the container
 COPY . /app/
 
-# Build the Go application
-RUN go build -o tagbuilder .
+# Set the build arguments
+ARG PYTHON_API_URL=http://172.17.0.2/generate-tags/
 
 # Set the environment variable for the Python API URL
-ENV PYTHON_API_URL=http://localhost:5000/generate-tags/
+ENV PYTHON_API_URL=$PYTHON_API_URL
+
+# Build the Go application with the build argument
+# RUN go build -o tagbuilder -ldflags "-X main.pythonURL=$PYTHON_API_URL" .
+RUN go build -o tagbuilder .
 
 # Expose the port that the web application will listen on
-EXPOSE 8080
+EXPOSE 8081
 
 # Define the command to run the web application
 CMD ["./tagbuilder"]

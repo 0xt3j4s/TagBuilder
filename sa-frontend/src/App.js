@@ -8,6 +8,7 @@ import TagResult from "./components/TagResult";
 
 const style = {
     marginLeft: 12,
+    align: 'right',
 };
 
 class App extends Component {
@@ -21,7 +22,8 @@ class App extends Component {
     };
 
     analyzeSentence() {
-        fetch('http://localhost:8080/', {
+        const GO_WEBAPP_URL ='http://localhost:8081/';
+        fetch(GO_WEBAPP_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,7 +42,7 @@ class App extends Component {
 
     render() {
         const tagResultComponent = this.state.tags !== undefined ?
-        <TagResult tags={this.state.tags} description={this.state.description}/> :
+        <TagResult tags={this.state.tags}/> :
         null;
 
 
@@ -49,8 +51,9 @@ class App extends Component {
                 <div className="centerize">
                     <Paper zDepth={1} className="content">
                         <h2>Tag Builder</h2>
+                        <br></br>
                         <TextField ref={ref => this.textField = ref} onKeyUp={this.onEnterPress.bind(this)}
-                                   hintText="Type your sentence."/>
+                                   hintText="Type your sentence." multiLine />
                         <RaisedButton  label="Send" style={style} onClick={this.analyzeSentence.bind(this)}/>
                         {tagResultComponent}
                     </Paper>

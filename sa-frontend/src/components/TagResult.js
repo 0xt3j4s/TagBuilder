@@ -5,7 +5,7 @@ class TagResult extends Component {
 
     propTypes = {
         tags: PropTypes.array.isRequired,
-        description: PropTypes.string.isRequired
+        // description: PropTypes.string.isRequired
     };
 
     render() {
@@ -15,7 +15,7 @@ class TagResult extends Component {
             <div>
                 <h3>Tags:</h3>
                 <ul>{tagsList}</ul>
-                <div>Description: {this.props.description}</div>
+                {/* <div>Description: {this.props.description}</div> */}
             </div>
         );
     }
