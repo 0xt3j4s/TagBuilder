@@ -2,19 +2,25 @@
 
 TagBuilder is a microservice-based application that enables the generation of tags for sentences. In this application, we utilize Docker containers to encapsulate and deploy each microservice independently. 
 
+
+
 ## Application Demo
 This application has one functionality. It takes a sentence as input. Using Natural Language Toolkit (NLTK), generates tags for the sentence. The tags are then displayed to the user. 
 
 ![Application Demo](/utils/TagBuilder_demo.gif)
 
 The application consists of three microservices, each one of specific functionality. The microservices are:
-1. sa-frontend: a Nginx web server that serves our static ReactJS application.
-2. sa-webapp: A Golang server that serves as the backend for handling the requests from the frontend.
-3. sa-logic:A Flask Application that performs tag generation.
+1. **sa-frontend**: a Nginx web server that serves our static ReactJS application.
+2. **sa-webapp**: A Golang server that serves as the backend for handling the requests from the frontend.
+3. **sa-logic**:A Flask Application that performs tag generation.
+
+
 
 ## Application Architecture
 The application architecture is shown in the figure below:
 ![TagBuilder Architecture](/utils/microservice_architecture.png)
+
+
 
 ## Containerization
 To enable easy deployment and scalability, each microservice in this application has been containerized using Docker. 
