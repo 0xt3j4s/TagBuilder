@@ -71,7 +71,7 @@ $ cd ..
 ```
 
 
-### Docker
+### Using Docker
 If you don't have Docker installed, you can follow the instructions [here](https://docs.docker.com/get-docker/).
 
 ### Pull the container images from Docker Hub using the following commands:
